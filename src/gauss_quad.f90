@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-06-04 at 16:18:03 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-06-04 at 16:18:03 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran module to provide Gaussian quadrature utilities. Note that this module depends on LAPACK.
 !!**************************************************************************************************
 module gauss_quad
@@ -35,8 +35,8 @@ module gauss_quad
     !! xpoints  = (OUT) Real array containing the nodes of the Gauss-Jacobi quadrature.
     !! weights  = (OUT) Real array containing the weights in the same order as "xpoints".
     !! 
-    !! Licensing: This subroutine is distributed under the Creative Commons (CC) BY-NC-SA license.
-    !! Author: David Gaspard <gaspard.dave@gmail.com>
+    !! Licensing: This subroutine is distributed under the MIT License.
+    !! Author: David Gaspard <david.gaspard@espci.fr>
     !! Created: June 4-5, 2024, based on a previous Python function written on September 19, 2023.
 	!!**********************************************************************************************
 	subroutine gauss_jacobi_quad(np, a, b, xmin, xmax, xpoints, weights)

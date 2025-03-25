@@ -1,7 +1,7 @@
 !!**************************************************************************************************
-!! Created on 2024-07-26 at 12:48:37 CEST by David Gaspard <gaspard.dave@gmail.com>
+!! Created on 2024-07-26 at 12:48:37 CEST by David Gaspard <david.gaspard@espci.fr>
 !! Based on the same module written on 2024-01-24 at 11:10:04 CET by David Gaspard for the Ebsolve program (v1).
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! This program is distributed under the MIT License.
 !! Fortran module providing the Eilenberger solver type for the Ebsolve program (v2).
 !! This object provides the essential subroutines to solve the Eilenberger_System object iteratively.
 !! This object also contains all the parameters of the iterative solver.

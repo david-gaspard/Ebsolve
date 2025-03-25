@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-07-26 at 12:54:33 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-07-26 at 12:54:33 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran program Ebsolve (v2). This program solves the Eilenberger equation, a self-consistent matrix
 !! transport equation, associated to the full counting statistics problem, i.e., the determination of
 !! the eigenvalue distribution of the transmission matrix t⁺t in a disordered waveguide or a slab.

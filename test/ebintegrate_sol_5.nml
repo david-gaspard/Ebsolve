@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-07-22 at 20:03:29 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-07-22 at 20:03:29 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran namelist containing a benchmark solution of the Eilenberger equation.
 !! This benchmark was done with the Mathematica program: ~/Travail/Brouillons/2022-12-27_Nazarov-Method/math/2024-07-19_Test-Eilenberger-Integrator.nb
 !!**************************************************************************************************

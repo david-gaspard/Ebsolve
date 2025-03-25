@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-07-21 at 13:02:08 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-07-21 at 13:02:08 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran module providing subroutine useful for unit testing.
 !!**************************************************************************************************
 module testing

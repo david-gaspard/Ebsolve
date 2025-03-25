@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
-## Created on 2024-01-26 at 16:09:23 CET by David Gaspard <gaspard.dave@gmail.com>
+## Created on 2024-01-26 at 16:09:23 CET by David Gaspard <david.gaspard@espci.fr>
 ## Python module providing the compile_tikz() function to compile TikZ files.
 ## This module is used by many template scripts in the folder ./tikz/
 ## This file is also callable as a script. When called, it compiles the given TikZ files.

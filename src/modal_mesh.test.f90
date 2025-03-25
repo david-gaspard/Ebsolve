@@ -1,7 +1,7 @@
 !!**************************************************************************************************
-!! Created on 2024-07-26 at 17:33:00 CEST by David Gaspard <gaspard.dave@gmail.com>
+!! Created on 2024-07-26 at 17:33:00 CEST by David Gaspard <david.gaspard@espci.fr>
 !! Based on the same module written on 2024-01-23 at 15:20:17 CET by David Gaspard for the Ebsolve program (v1).
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! This program is distributed under the MIT License.
 !! Fortran program to test the modal_mesh module which is supposed to generate the modal lattices "mumesh" and "cmesh".
 !!**************************************************************************************************
 program modal_mesh_test

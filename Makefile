@@ -1,4 +1,4 @@
-## Created on 2024-07-21 at 13:42:32 CEST by David Gaspard <gaspard.dave@gmail.com> 
+## Created on 2024-07-21 at 13:42:32 CEST by David Gaspard <david.gaspard@espci.fr> 
 ## Makefile of the Fortran program Ebsolve (v2) aiming at solving the Eilenberger equation.
 ##########################
 ## FILE PARAMETERS

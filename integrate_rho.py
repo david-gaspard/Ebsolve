@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
-## Created on 2023-10-20 at 16:51:05 CEST by David Gaspard <gaspard.dave@gmail.com>
+## Created on 2023-10-20 at 16:51:05 CEST by David Gaspard <david.gaspard@espci.fr>
 ## Updated on 2024-02-01 at 17:57:38 CET for the Ebsolve program written in Fortran.
 ## Python script to integrate the density rho(T) and check if it is normalized to 1.
 import sys, os

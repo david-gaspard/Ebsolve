@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-07-19 at 11:58:15 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-07-19 at 11:58:15 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran module to integrate the Eilenberger equation, a matrix transport equation, in a single direction along a single ray.
 !!**************************************************************************************************
 module integrator

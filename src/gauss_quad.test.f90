@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-06-04 at 18:15:13 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-06-04 at 18:15:13 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran program to test the Gaussian quadrature utilities.
 !!**************************************************************************************************
 program gauss_quad_test

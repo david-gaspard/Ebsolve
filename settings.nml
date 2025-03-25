@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-07-26 at 12:59:39 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-07-26 at 12:59:39 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran namelists containing the settings of the Ebsolve program (v2).
 !!**************************************************************************************************
 &main_settings

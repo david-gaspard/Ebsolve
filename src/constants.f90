@@ -1,6 +1,6 @@
 !!**************************************************************************************************
-!! Created on 2024-07-21 at 13:07:32 CEST by David Gaspard <gaspard.dave@gmail.com>
-!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Created on 2024-07-21 at 13:07:32 CEST by David Gaspard <david.gaspard@espci.fr>
+!! This program is distributed under the MIT License.
 !! Fortran module providing the global constants of the Ebsolve program (v2).
 !!**************************************************************************************************
 module constants
@@ -18,9 +18,9 @@ module constants
     complex(wp), parameter :: iu = (0._wp, 1._wp)  !! Imaginary unit (iu).
     
     !! Global strings regarding the program:
-    character(len=*), parameter :: program_shortname = "Ebsolve v2.0"
+    character(len=*), parameter :: program_shortname = "Ebsolve v1.0"
     character(len=*), parameter :: program_fullname  = program_shortname // " - Program to solve the Eilenberger equation"
-    character(len=*), parameter :: program_copyright = program_shortname // " (c) 2024 David GASPARD <gaspard.dave@gmail.com>"
+    character(len=*), parameter :: program_copyright = program_shortname // " (c) 2024 David GASPARD <david.gaspard@espci.fr>"
     
     !! Special characters:
     character, parameter :: char_tab = char(9)       !! Tab character.
