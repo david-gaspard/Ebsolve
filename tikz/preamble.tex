@@ -1,0 +1,91 @@
+%% Created on 2024-01-26 at 15:13:33 CET by David Gaspard <gaspard.dave@gmail.com> 
+%% Global LaTeX preamble used to compile the TikZ files. This file defines the global LaTeX settings used for the compilation of the TikZ files.
+\usepackage[utf8]{inputenc}%% Input encoding: UTF-8.
+\usepackage[T1]{fontenc}%% Standard font output.
+\usepackage[english, shorthands=off]{babel}%% Deactivate the shorthands to prevent conflict with pgfplots (especially with French).
+\usepackage[a4paper, margin=20mm, headheight=15pt, headsep=15pt]{geometry}%% Page layout and margin size.
+\linespread{1.1}%% Increasing the line spacing.
+\usepackage{amsmath, amssymb}%% Standard mathematical packages.
+\usepackage{pgfplots}%% Graph and other vectorial schemes package, imports the xcolor, graphicx, and TikZ packages by default.
+
+%%%%%% DEFINE COMMON MATHEMATICAL COMMANDS %%%%%%
+\renewcommand{\Re}{\operatorname{Re}}%%%% Symbol of the real part of a complex number.
+\renewcommand{\Im}{\operatorname{Im}}%%%% Symbol of the imaginary part of a complex number.
+\newcommand{\D}{\mathop{}\!\mathrm{d}}%%%% Symbol of the differential, renewcommand because no spacing is needed. Should be preceded by \: in an integral for correct spacing.
+\newcommand{\E}{\mathop{}\!\mathrm{e}}%%%% Symbol of the Euler E constant.
+\newcommand{\I}{\mathrm{i}}           %%%% Symbol of the imaginary unit.
+\newcommand{\der}[3][]{\frac{\D^{#1} #2}{\D #3^{#1}}}              %%%% Total derivative command. ex: \der{f}{x}(x) or \der{}{x}f(x) and \der[2]{f}{x}(x) or \der[2]{}{x}f(x).
+\newcommand{\pder}[3][]{\frac{\partial^{#1} #2}{\partial #3^{#1}}} %%%% Partial derivative command (same syntax as \der).
+\newcommand{\vect}[1]{\boldsymbol{\mathrm{#1}}}                    %%%% Command for highlighting the vectors (indices should be set outside). NB: Can be extended to greek symbols: \boldsymbol{\rm #1}
+\newcommand{\matr}[1]{\mathsf{#1}}                                 %%%% Command for highlighting the matrices (indices should be set outside). NB: Only works with latin and uppercase greek symbols.
+\newcommand{\op}[1]{\hat{#1}}                                      %%%% Command for highlighting the abstract operators (indices should be set outside).
+\newcommand{\bra}[1]{\left\langle#1\right|}                        %%%% Bra notation.
+\newcommand{\ket}[1]{\left|#1\right\rangle}                        %%%% Ket notation.
+\newcommand{\braket}[2]{\left\langle#1\middle|#2\right\rangle}     %%%% Bra-Ket notation.
+\newcommand{\avg}[1]{\left\langle#1\right\rangle}                  %%%% Average notation.
+\newcommand{\tavg}[1]{\langle#1\rangle}                            %%%% Inline text version of the average notation.
+\newcommand{\abs}[1]{\left|#1\right|}                              %%%% Absolute value and vector norm notation.
+\newcommand{\norm}[1]{\left\|#1\right\|}                           %%%% Notation for the norm of a vector.
+\newcommand{\tran}[1]{{#1}^{\intercal}}                            %%%% Matrix transpose notation.
+\newcommand{\freal}[1]{{#1}_{\rm r}}                               %%%% Index notation for the real part.
+\newcommand{\fimag}[1]{{#1}_{\rm i}}                               %%%% Index notation for the imaginary part.
+\newcommand{\cc}[1]{{#1}^*}                                        %%%% Complex conjugate notation using star/asterisk.
+\newcommand{\herm}[1]{#1^{\dagger}}                                %%%% Matrix/Operator hermitian notation.
+
+%%%%%% DEFINE COLOR PALETTES %%%%%%
+\definecolor{ebcolor1}{HTML}{FF2B25}%% Color palette of the Ebsolve program (Reddish color).
+\definecolor{ebcolor2}{HTML}{EBCB00}%% Color palette of the Ebsolve program (Yellowish color).
+\definecolor{ebcolor3}{HTML}{14DB00}%% Color palette of the Ebsolve program (Greenish color).
+\definecolor{ebcolor4}{HTML}{2EB3FF}%% Color palette of the Ebsolve program (Cyanish color).
+\definecolor{ebcolor5}{HTML}{3647F0}%% Color palette of the Ebsolve program (Bluish color).
+\definecolor{ebcolor6}{HTML}{E100DD}%% Color palette of the Ebsolve program (Magentaish color).
+\definecolor{pyplot1}{HTML}{1F77B4}%% Color #1 of Matplotlib's palette.
+\definecolor{pyplot2}{HTML}{FF7F0E}%% Color #2 of Matplotlib's palette.
+\definecolor{pyplot3}{HTML}{2CA02C}%% Color #3 of Matplotlib's palette.
+\definecolor{pyplot4}{HTML}{D62728}%% Color #4 of Matplotlib's palette.
+
+%%%%%% CONFIGURE TIKZ %%%%%%
+\usetikzlibrary{decorations.markings}%% Import TikZ libraries. Other libraries: shadows, calligraphy, ...
+\tikzset{%% TikZ settings.
+	font={\footnotesize}, %% Set the default font size. Actual default is \small, but \footnotesize is even smaller.
+	ultra thin/.style=  {line width=0.2pt},
+	very thin/.style=   {line width=0.4pt},
+	thin/.style=        {line width=0.6pt},
+	semithick/.style=   {line width=0.8pt},
+	thick/.style=       {line width=1.0pt},
+	very thick/.style=  {line width=1.4pt},
+	ultra thick/.style= {line width=1.8pt},
+	every picture/.append style={thin}, %% Set the default thickness for all tikzpictures.
+	every node/.append style={transform shape},
+}
+
+%%%%%% CONFIGURE PGFPLOTS %%%%%%
+\pgfplotsset{%% PGFPlots settings.
+    compat=1.18, %% PGFPlots compatibility. See the log file to know what version is actually used (typically: \pgfplotsset{compat=1.16}).
+	every axis/.append style={%%
+        width=220pt,
+		axis line style={thin}, %% Set the default thickness for axis lines.
+		every axis title/.style={%%
+            at={(0.5, 1)},
+            above,
+            align=center,
+        },
+        legend style={%%
+            thin,
+            cells={anchor=west},
+        },
+        scaled ticks=false,
+        ticklabel style={%%
+            /pgf/number format/fixed,
+            /pgf/number format/precision=5,
+            /pgf/number format/1000 sep={\,},
+        },
+        yticklabel style={rotate=90},
+		enlarge x limits=false,
+        mark size=1.2,
+        axis on top=true,
+	},
+    every axis plot/.append style={thick},
+    table/col sep=comma,  %% Data files are in CSV format.
+}
+%%%%%% End of File %%%%%%

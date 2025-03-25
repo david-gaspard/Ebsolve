@@ -1,0 +1,13 @@
+## Created on 2025-03-25 at 16:03:45 CET by David Gaspard <david.gaspard@espci.fr>.
+## Directories ##
+bin/
+out/
+old/
+tikz/__pycache__/
+
+## Binary files ##
+ebsolve
+*.test
+*.mod
+*.o
+

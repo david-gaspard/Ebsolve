@@ -1,0 +1,57 @@
+!!**************************************************************************************************
+!! Created on 2024-07-26 at 12:59:39 CEST by David Gaspard <gaspard.dave@gmail.com>
+!! This program is distributed under the Creative Commons (CC) BY-NC-SA license.
+!! Fortran namelists containing the settings of the Ebsolve program (v2).
+!!**************************************************************************************************
+&main_settings
+	task = 'distrib'     !! Define the task: "distrib" or "fields" (see namelists below for details).
+/
+
+!! ======== PHYSICAL SETTINGS ========
+
+&eilenberger_system
+    modetype = 'periodic'  !! Defines the transverse profile of the waveguide, the shape and the boundary conditions (see namelists below for details).
+	nxdiso = 100           !! Number of 'x' points on the mesh in the bulk. Should be at least 2. Recommended is nxdiso=50..100.
+    nxfree = 1             !! Number of 'x' points on the mesh at one edge. Should be at least 1. Recommended is nxfree=1 for "distrib" simulations.
+	dscat = 15.            !! Optical depth of scattering of the disordered region, L/l_scat.
+	dabso = 0.0            !! Optical depth of absorption of the disordered region, L/l_abso. In general: L/l_a * L/l_s << 1, and l_a/l_s ~ 10.
+	xa = -0.07             !! Position of the contact point 'xa' on the x mesh. The disordered region is for x in [0, 1].
+	xb =  1.07             !! Position of the contact point 'xb' on the x mesh. The disordered region is for x in [0, 1].
+    naper_a = 0.8          !! Numerical aperture at port 'a' (value of sin(theta_max)). In 2D, fraction of excited modes. Typically: naper_a={0.1, 0.2, 0.5, 1}.
+    naper_b = 0.8          !! Numerical aperture at port 'b' (value of sin(theta_max)). In 2D, fraction of observed modes. Typically: naper_b=1.
+/
+
+&periodic       !! Square waveguide with periodic boundary conditions in the transverse direction.
+	d = 2       !! Total number of dimensions of the waveguide Typically, d=2 for a 2D system.
+	wol = 50.5  !! Width-to-wavelength ratio, W/lambda, defining the number of modes. In 2D, opening thresholds of modes occur at integer values of 'wol'.
+                !! Letter's std value: wol=50.5. Typically: wol={25.5, 25.98, 26.02}.
+/
+
+&infinite        !! Infinite slab case. Integration path over the directions cosines "mu" is deformed in the complex plane.
+	d = 2        !! Total number of dimensions of the waveguide. Typically, d=2 for a 2D system.
+	nmu = 100    !! Number of 'mu' points, ideally very large. In the interval nmu={50, ..., 200} is generally enough.
+	ash = 1.0    !! Shift factor of the integration path in the complex 'mu' plane. The integration path is: mu(t) = t + i*afac*t*(1-t)*(1+t) for t in [0, 1].
+/
+
+!! ======== TASK SETTINGS ========
+
+&distrib            !! Compute the full distribution over an interval of transmission eigenvalue.
+	ntm  = 256      !! Number of desired samples for the distribution rho(T). Typically, a multiple of the thread number: ntm=512.
+	tmin = 0.0      !! Minimum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes.
+	tmax = 1.0      !! Minimum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes.
+    geps = 1.0e-15  !! Shift of the gamma values to avoid being exactly on the real gamma axis. In principle, this value can be very small but nevertheless positive.
+    nthreads = 10   !! Number of threads used by OpenMP to parallelize the computations of the distribution points. Use: nthreads=1 to disable parallelization.
+/
+
+&fields              !! Compute the Qn(x) and Jn(x) fields for a given value of the transmission eigenvalue T.
+    tm = 0.001       !! Transmission eigenvalue at which the fields are desired. Should be in [0, 1].
+    geps = 1.0e-15   !! Shift of gamma values to avoid being exactly on the branch cut of the distribution points. Should be positive.
+/
+
+&solver               !! Settings of the Eilenberger solver (relaxed fixed-point iteration).
+    method = 'relax'  !! Type of iterative method used to solve the Eilenberger equation ("fpi", "relax", ...). Recommended is "relax".
+	maxit = 3000      !! Maximum number of fixed-point iteration to solve the Eilenberger equation. Typically, maxit=2000 is enough.
+	qtol = 1.0e-9     !! Tolerance on the relative variation of the Qn(x) field. Typically between 1e-14 and 1e-9. Larger than 1e-5 is not appropriate.
+	frelax = 0.9      !! Relaxation factor of the Eilenberger solver. Generally, frelax is in [0.5, 1] for depth_scat < 10, but over-relaxation (frelax > 1) is likely more appropriate in the far diffusive regime (depth_scat > 10).
+	verbose = 0       !! Verbosity level of the solver (0=Quiet, 1=Verbose). In general, this is useful for debugging when something went wrong.
+/

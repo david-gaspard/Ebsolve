@@ -1,0 +1,42 @@
+\definecolor{color11}{HTML}{1F77B4}%%%% Custom color.
+\definecolor{color12}{HTML}{E3A600}%%%% Custom color. OLD: FF7F0E
+\definecolor{color21}{HTML}{D62728}%%%% Custom color.
+\begin{tikzpicture}[%%
+    /pgfplots/every axis/.append style={%%
+        legend style={at={(0.5, 1)}, above=3pt},
+        legend columns=3,
+    },
+]%%
+\begin{axis}[%%
+    name={qn},
+    xlabel={$x/L$},
+    ylabel={$\tilde{\matr{Q}}(x)$},
+]%%
+%%%% Plot real parts:
+\addplot[color11] table[x=x, y=reqn11]{\jobname.csv}; \addlegendentry{$\Re\tilde{Q}_{11}$}
+\addplot[color12] table[x=x, y=reqn12]{\jobname.csv}; \addlegendentry{$\Re\tilde{Q}_{12}$}
+\addplot[color21] table[x=x, y=reqn21]{\jobname.csv}; \addlegendentry{$\Re\tilde{Q}_{21}$}
+%%%% Plot imaginary parts:
+\addplot[color11, densely dashed] table[x=x, y=imqn11]{\jobname.csv}; \addlegendentry{$\Im\tilde{Q}_{11}$}
+\addplot[color12, densely dashed] table[x=x, y=imqn12]{\jobname.csv}; \addlegendentry{$\Im\tilde{Q}_{12}$}
+\addplot[color21, densely dashed] table[x=x, y=imqn21]{\jobname.csv}; \addlegendentry{$\Im\tilde{Q}_{21}$}
+\end{axis}%%
+\node[above, align=left, text width=0.85\textwidth] at (qn.above north east) {%(title)s};
+\begin{axis}[%%
+    name={jn},
+    at={(qn.right of south east)},
+    anchor={left of south west},
+    xshift={5pt},
+    xlabel={$x/L$},
+    ylabel={$\tilde{\matr{J}}_{x}(x)$},
+]%%
+%%%% Plot real parts:
+\addplot[color11] table[x=x, y=rejn11]{\jobname.csv}; \addlegendentry{$\Re\tilde{J}_{x,11}$}
+\addplot[color12] table[x=x, y=rejn12]{\jobname.csv}; \addlegendentry{$\Re\tilde{J}_{x,12}$}
+\addplot[color21] table[x=x, y=rejn21]{\jobname.csv}; \addlegendentry{$\Re\tilde{J}_{x,21}$}
+%%%% Plot imaginary parts:
+\addplot[color11, densely dashed] table[x=x, y=imjn11]{\jobname.csv}; \addlegendentry{$\Im\tilde{J}_{x,11}$}
+\addplot[color12, densely dashed] table[x=x, y=imjn12]{\jobname.csv}; \addlegendentry{$\Im\tilde{J}_{x,12}$}
+\addplot[color21, densely dashed] table[x=x, y=imjn21]{\jobname.csv}; \addlegendentry{$\Im\tilde{J}_{x,21}$}
+\end{axis}%%
+\end{tikzpicture}%%
