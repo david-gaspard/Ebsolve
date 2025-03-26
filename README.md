@@ -107,7 +107,7 @@ The program has the following dependencies:
 
 * The [`gfortran`](https://en.wikipedia.org/wiki/GNU_Fortran) compiler, or any other compiler compliant with the [Fortran 2008](https://en.wikipedia.org/wiki/Fortran#Fortran_2008) standard and providing support for [OpenMP](https://en.wikipedia.org/wiki/OpenMP).
 * The [LAPACK](https://en.wikipedia.org/wiki/LAPACK) Library.
-* The `mkdir` command is called to create subdirectories to store the output data.
+* The [`mkdir`](https://en.wikipedia.org/wiki/Mkdir) command is called to create subdirectories to store the output data.
 * [Python 3](https://en.wikipedia.org/wiki/Python_(programming_language)) scripts are called to generate the [TikZ](https://en.wikipedia.org/wiki/PGF/TikZ) codes for the plots.
 * The [LaTeX](https://en.wikipedia.org/wiki/LaTeX) compiler `pdflatex` with the [PGFPlots package](https://www.ctan.org/pkg/pgfplots) is called to compile the plots.
 

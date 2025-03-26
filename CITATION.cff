@@ -8,8 +8,8 @@ message: >-
   metadata from this file.
 type: software
 authors:
-  - given-names: Gaspard
-    family-names: David
+  - given-names: David
+    family-names: Gaspard
     email: david.gaspard@espci.fr
     affiliation: 'Institut Langevin, ESPCI Paris'
     orcid: 'https://orcid.org/0000-0002-4449-8782'
@@ -22,11 +22,6 @@ identifiers:
     description: The URL for the latest version
 repository-code: 'https://github.com/david-gaspard/Ebsolve'
 abstract: >-
-  Ebsolve v1.0 - Solving the matrix transport equation for
-  the transmission eigenvalue distribution in a disordered
-  waveguide
-
-
   Ebsolve is a Fortran 2008 program to solve the matrix
   transport equation of radiant field theory (D. Gaspard and
   A. Goetschy, arXiv:2411.10360 [math-ph], arXiv:2411.10355
