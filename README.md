@@ -74,7 +74,7 @@ Once the matrix transport equation is solved for $\mathsf{g}(\mathbf{\Omega},\ma
 
 <p>$$ F(\gamma) = \mathrm{i} \left( \gamma_{\rm a}' \tilde{J}_x^{21}(x_{\rm a}) + \gamma_{\rm b}' \tilde{J}_x^{12}(x_{\rm b}) \right) $$</p>
 
-where $\tilde{\mathsf{J}}_x$ is the longitudinal component of the matrix current given by
+where $\tilde{\mathsf{J}}_x$ is a 2-by-2 matrix which is the longitudinal component of the matrix current given by
 
 <p>$$ \tilde{\mathsf{J}}_x(x) = \oint \frac{d\mathbf{\Omega}}{2V_{d-1}} \Omega_x \mathsf{g}(\mathbf{\Omega},\mathbf{r}) $$</p>
 
