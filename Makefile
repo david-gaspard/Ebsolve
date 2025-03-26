@@ -32,7 +32,10 @@ DEBUG   = -g -O0 -fbacktrace -fcheck=all
 FFLAGS  = -J$(BINDIR) -Wall -Wno-tabs $(OMP)
 LIBS    = -llapack
 
-all: $(PROGNAME)
+all: directories $(PROGNAME)
+
+directories:
+	mkdir -p $(BINDIR)
 
 $(PROGNAME): $(BINLIST) $(MAINFILE:%.f90=bin/%.o)
 	$(FORT) $(FFLAGS) $^ $(LIBS) -o $@
@@ -46,7 +49,7 @@ $(BINDIR)/%.o: $(SRCDIR)/%.f90
 TESTSRCLIST = $(shell find $(SRCDIR) -name "*.test.f90")
 TESTEXELIST = $(TESTSRCLIST:$(SRCDIR)/%.f90=%)
 
-test: $(BINLIST) $(TESTEXELIST)
+test: directories $(BINLIST) $(TESTEXELIST)
 
 %.test: $(BINLIST) bin/testing.o $(BINDIR)/%.test.o
 	$(FORT) $(FFLAGS) $^ $(LIBS) -o $@
@@ -55,6 +58,6 @@ test: $(BINLIST) $(TESTEXELIST)
 ## CLEAN ALL BUILDS AND TESTS
 ##################################
 clean:
-	rm -rfv $(PROGNAME) $(BINDIR)/*.o $(BINDIR)/*.mod $(TESTEXELIST)
+	rm -rfv $(PROGNAME) $(BINDIR) $(TESTEXELIST)
 
 ###### END OF FILE ######

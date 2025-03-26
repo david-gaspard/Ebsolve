@@ -14,7 +14,7 @@
 ## PRESENTATION
 
 Ebsolve is a Fortran 2008 program to solve the matrix transport equation of *radiant field theory* [[1](#1), [2](#2)] in a rectilinear [waveguide](https://en.wikipedia.org/wiki/Waveguide) geometry.
-The solution of this equation provides the distribution of [transmission eigenvalues](https://en.wikipedia.org/wiki/Landauer_formula) through a disordered waveguide.
+The solution of this equation provides the distribution function of [transmission eigenvalues](https://en.wikipedia.org/wiki/Landauer_formula) through a disordered waveguide.
 
 The matrix transport equation reads [[1](#1), [2](#2)]
 
