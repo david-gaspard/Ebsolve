@@ -1,0 +1,46 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Ebsolve
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Gaspard
+    family-names: David
+    email: david.gaspard@espci.fr
+    affiliation: 'Institut Langevin, ESPCI Paris'
+    orcid: 'https://orcid.org/0000-0002-4449-8782'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.15090496
+    description: The DOI for the latest release
+  - type: url
+    value: 'https://github.com/david-gaspard/Ebsolve'
+    description: The URL for the latest version
+repository-code: 'https://github.com/david-gaspard/Ebsolve'
+abstract: >-
+  Ebsolve v1.0 - Solving the matrix transport equation for
+  the transmission eigenvalue distribution in a disordered
+  waveguide
+
+
+  Ebsolve is a Fortran 2008 program to solve the matrix
+  transport equation of radiant field theory (D. Gaspard and
+  A. Goetschy, arXiv:2411.10360 [math-ph], arXiv:2411.10355
+  [math-ph]) in a rectilinear waveguide geometry. The
+  solution of this equation provides the distribution
+  function of transmission eigenvalues through a disordered
+  waveguide.
+keywords:
+  - Matrix transport equation
+  - Eilenberger equation
+  - Transmission eigenvalue distribution
+  - Radiant field theory
+  - Disordered waveguide
+license: MIT
+commit: df47d1013e435f60ddf26a9fb72a853c72a32c91
+version: v1.0
+date-released: '2025-03-26'
