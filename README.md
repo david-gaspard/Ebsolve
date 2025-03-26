@@ -139,36 +139,59 @@ This namelist specifies the physical parameters of the disordered waveguide. The
 ### `periodic`
 
 This namelist specifies a squared-cross-section waveguide with *periodic* boundary conditions in the transverse direction.
+It must be defined if the option `modetype=periodic` is declared.
 
-* `d`: Total number of dimensions of the waveguide. Typically, d=2 for a 2D system.
+* `d`: Total number of dimensions of the waveguide. Typically, `d=2` for a 2D system.
 * `wol`: Width-to-wavelength ratio, $W/\lambda$, defining the number of modes. In 2D, thresholds of opening of modes occur at *integer* values of `wol`.
 Therefore, integer values of `wol` are forbidden because of division by zero. The standard value of the short paper [[1]](#1) is `wol=50.5`.
 
 ### `infinite`
 
 This namelist specifies an infinite slab (infinitely wide waveguide). Integration path over the directions cosines $\mu=\cos\theta$ is deformed in the complex plane of $\mu$.
+It must be defined if the option `modetype=infinite` is declared.
 
-* `d`: Total number of dimensions of the waveguide. Typically, d=2 for a 2D system.
+* `d`: Total number of dimensions of the waveguide. Typically, `d=2` for a 2D system.
 * `nmu`: Number of $\mu$ points, ideally very large. In the interval `nmu=50..200` is generally enough.
-* `ash`: Shift factor of the integration path in the complex $\mu$ plane. The integration path is: $\mu(t) = t + \mathrm{i} a t(1-t)(1+t)$ for $t\in[0, 1]$.
+* `ash`: Shift factor of the integration path in the complex $\mu$ plane. The integration path is: $\mu(t) = t + \mathrm{i} a t(1-t)(1+t)$ for $t\in[0, 1]$. Recommended value is `ash=1`.
 
 ### `distrib`
 
-This namelist specifies the `distrib` task ordered by the `main_settings` namelist.
-Compute the probability density function, $\rho(T)$, for the transmission eigenvalues over an interval of transmission eigenvalue.
+This namelist specifies the `distrib` task ordered by the [`main_settings`](#main_settings) namelist.
+Compute the probability density function of transmission eigenvalues, $\rho(T)$, over an interval of transmission eigenvalue $T\in[T_{\min},T_{\max}]$.
 The points of $T$ are taken as the [Chebyshev nodes](https://en.wikipedia.org/wiki/Chebyshev_nodes) of the first kind in order to refine the mesh at the two edges of the distribution (where the density usually increases).
 
 * `ntm`: Number of desired samples for the distribution $\rho(T)$. Typically, a multiple of the thread number. Recommended value is `ntm=256`.
-* `tmin`: Minimum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes.
-* `tmax`: Maximum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes.
+* `tmin`: Minimum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes. Recommended value is `tmin=0`.
+* `tmax`: Maximum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes. Recommended value is `tmax=1`.
 * `geps`: Shift of the gamma values to avoid being exactly on the real gamma axis. In principle, this value can be very small but nevertheless positive. Recommended value is `geps=1.0e-15`.
 * `nthreads`: Number of threads used by OpenMP to parallelize the computations of the distribution points. Recommended value is the number of CPU cores.
 
 ### `fields`
 
+This namelist specifies the `fields` task ordered by the [`main_settings`](#main_settings) namelist.
+Compute the matrix field, $\tilde{\mathsf{Q}}(x)$, and the longitudinal component of the matrix current, $\tilde{\mathsf{J}}_x(x)$, as a function of the position $x$ for a given value of the transmission eigenvalue $T$.
 
+* `tm`: Transmission eigenvalue at which the fields are desired. Should be between 0 and 1.
+* `geps`: Shift of gamma values to avoid being exactly on the branch cut of the distribution points. In principle, this value can be very small but nevertheless positive. Recommended value is `geps=1.0e-15`.
 
 ### `solver`
+
+This namelist specifies the settings of the solver of the matrix transport equation, and is thus mandatory.
+
+The iterative procedure to solve the equation is the following: 
+1. Let $\tilde{\mathsf{Q}}(x)=0$ as the initial ansatz.
+2. Compute the matrix radiance $\mathsf{g}(\mathbf{\Omega},x)$ by solving the matrix transport equation for each direction $\mathbf{\Omega}$ (or for each waveguide mode).
+3. Compute the new matrix field $\tilde{\mathsf{Q}}(x)$ from the radiance using the integral over the directions (or the sum over the waveguide modes).
+The computed matrix field is then mixed with the previous one with the mixing weight $f_{\rm relax}$. When $f_{\rm relax}=1$, this step reduces to a simple fixed-point iteration (see `method=fpi`).
+4. Iterate through steps 2-3 until the relative variations of the $\tilde{\mathsf{Q}}(x)$ field are small. This iteration is controlled by the `maxit` and `qtol` parameters.
+
+The parameters of the `solver` namelist are:
+
+* `method`: Type of iterative method used to solve the matrix transport equation. Either `fpi` for simple fixed-point iteration, or `relax` to use a relaxation factor. Recommended is `relax`.
+* `maxit`: Maximum number of fixed-point iteration to solve the Eilenberger equation. In general, `maxit=3000` is enough.
+* `qtol`: Tolerance on the relative variation of the $\tilde{\mathsf{Q}}(x)$ field. Typically between `1e-14` and `1e-9`. Larger than `1e-5` is not appropriate because the residual error on $\rho(T)$ will likely be too large.
+* `frelax`: Relaxation factor of the solver, only used with `method=relax`. Generally, frelax is between 0.5 and 1 for `dscat<10`, but over-relaxation (`frelax>1`) is likely more appropriate in the far diffusive regime (`dscat>10`).
+* `verbose`: Verbosity level of the solver (0=Quiet, 1=Verbose). This is useful only for debugging when something goes wrong.
 
 
 ## REFERENCES
