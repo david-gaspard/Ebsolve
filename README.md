@@ -124,22 +124,25 @@ This entry points to another namelist of the same title in the `settings.nml` fi
 
 ### `eilenberger_system`
 
-This namelist specifies the physical parameters of the disordered waveguide. The disordered aveguide is assumed to have length $L$.
+This namelist specifies the physical parameters of the disordered waveguide. The disordered region is assumed to have length $L$.
 
 * `modetype`: Defines the transverse profile of the waveguide, the shape and the boundary conditions. Either [`periodic`](#periodic) or [`infinite`](#infinite). See the namelists below.
 * `nxdiso`: Number of 'x' points on the mesh in the bulk. Should be at least 2. Recommended value is `nxdiso=100`.
 * `nxfree`: Number of 'x' points on the mesh at one edge. Should be at least 1. Recommended value is `nxfree=1` for `distrib` simulations.
 * `dscat`: Scattering thickness of the disordered region, $L/\ell_{\rm s}$, where $\ell_{\rm s}$ is the scattering mean free path.
 * `dabso`: Absorption thickness of the disordered region, $L/\ell_{\rm a}$, where $\ell_{\rm a}$ is the absorption length.
-* `xa`: Position of the contact point $x_{\rm a}$ on the x mesh. The disordered region is for $x\in[0, 1]$.
-* `xb`: Position of the contact point $x_{\rm b}$ on the x mesh. The disordered region is for $x\in[0, 1]$.
+* `xa`: Position of the contact point $x_{\rm a}$ on the x mesh in units of $L$. The disordered region is for $x\in[0, 1]$.
+* `xb`: Position of the contact point $x_{\rm b}$ on the x mesh in units of $L$. The disordered region is for $x\in[0, 1]$.
 * `naper_a`: Numerical aperture of the input lead, $m_{\rm a}$. In 2D, fraction of excited modes. It must be in $[0, 1]$.
 * `naper_b`: Numerical aperture of the output lead, $m_{\rm b}$. In 2D, fraction of observed modes. It must be in $[0, 1]$.
 
 ### `periodic`
 
-This namelist specifies a squared-cross-section waveguide with *periodic* boundary conditions in the transverse direction.
-It must be defined if the option `modetype=periodic` is declared.
+This namelist specifies a waveguide with *periodic* boundary conditions in the transverse direction (and square cross section).
+It must necessarily be defined if the option `modetype=periodic` is declared.
+It is important to note that the finiteness of the waveguide width imposes a quantization of the wavefunction into transverse modes which modifies the matrix transport equation and the expressions of the matrix field and current. See the paper [[2]](#2) for details about these modifications.
+
+The parameters of this namelist are the following:
 
 * `d`: Total number of dimensions of the waveguide. Typically, `d=2` for a 2D system.
 * `wol`: Width-to-wavelength ratio, $W/\lambda$, defining the number of modes. In 2D, thresholds of opening of modes occur at *integer* values of `wol`.
@@ -147,12 +150,15 @@ Therefore, integer values of `wol` are forbidden because of division by zero. Th
 
 ### `infinite`
 
-This namelist specifies an infinite slab (infinitely wide waveguide). Integration path over the directions cosines $\mu=\cos\theta$ is deformed in the complex plane of $\mu$.
-It must be defined if the option `modetype=infinite` is declared.
+This namelist specifies an *infinite slab* (infinitely wide waveguide), and must be defined if the option `modetype=infinite` is declared.
+The integral of the radiance over the direction cosine, $\mu=\cos\theta$, is deformed in the complex plane of $\mu$ in order to avoid the essential singularity of $\mathsf{g}(\mu,x)$ for grazing modes ($\mu=0$).
+The integration path $\mu(t) = t + \mathrm{i} a t(1-t)(1+t)$ for $t\in[0, 1]$, where $a$ is a positive shift factor of the order of 1.
+
+The parameters of this namelist are the following:
 
 * `d`: Total number of dimensions of the waveguide. Typically, `d=2` for a 2D system.
 * `nmu`: Number of $\mu$ points, ideally very large. In the interval `nmu=50..200` is generally enough.
-* `ash`: Shift factor of the integration path in the complex $\mu$ plane. The integration path is: $\mu(t) = t + \mathrm{i} a t(1-t)(1+t)$ for $t\in[0, 1]$. Recommended value is `ash=1`.
+* `ash`: Shift factor of the integration path in the complex $\mu$ plane. Recommended value is `ash=1`.
 
 ### `distrib`
 
@@ -160,10 +166,12 @@ This namelist specifies the `distrib` task ordered by the [`main_settings`](#mai
 Compute the probability density function of transmission eigenvalues, $\rho(T)$, over an interval of transmission eigenvalue $T\in[T_{\min},T_{\max}]$.
 The points of $T$ are taken as the [Chebyshev nodes](https://en.wikipedia.org/wiki/Chebyshev_nodes) of the first kind in order to refine the mesh at the two edges of the distribution (where the density usually increases).
 
+The parameters of this namelist are the following:
+
 * `ntm`: Number of desired samples for the distribution $\rho(T)$. Typically, a multiple of the thread number. Recommended value is `ntm=256`.
 * `tmin`: Minimum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes. Recommended value is `tmin=0`.
 * `tmax`: Maximum transmission eigenvalue. This bound is never reached exactly by the Chebyshev nodes. Recommended value is `tmax=1`.
-* `geps`: Shift of the gamma values to avoid being exactly on the real gamma axis. In principle, this value can be very small but nevertheless positive. Recommended value is `geps=1.0e-15`.
+* `geps`: Shift of the $\gamma$ values to avoid being exactly on the real gamma axis. In principle, this value can be very small but nevertheless positive. Recommended value is `geps=1.0e-15`.
 * `nthreads`: Number of threads used by OpenMP to parallelize the computations of the distribution points. Recommended value is the number of CPU cores.
 
 ### `fields`
@@ -171,8 +179,10 @@ The points of $T$ are taken as the [Chebyshev nodes](https://en.wikipedia.org/wi
 This namelist specifies the `fields` task ordered by the [`main_settings`](#main_settings) namelist.
 Compute the matrix field, $\tilde{\mathsf{Q}}(x)$, and the longitudinal component of the matrix current, $\tilde{\mathsf{J}}_x(x)$, as a function of the position $x$ for a given value of the transmission eigenvalue $T$.
 
+The parameters of this namelist are the following:
+
 * `tm`: Transmission eigenvalue at which the fields are desired. Should be between 0 and 1.
-* `geps`: Shift of gamma values to avoid being exactly on the branch cut of the distribution points. In principle, this value can be very small but nevertheless positive. Recommended value is `geps=1.0e-15`.
+* `geps`: Shift of the $\gamma$ values to avoid being exactly on the branch cut of the distribution points. In principle, this value can be very small but nevertheless positive. Recommended value is `geps=1.0e-15`.
 
 ### `solver`
 
@@ -182,7 +192,7 @@ The iterative procedure to solve the equation is the following:
 1. Let $\tilde{\mathsf{Q}}(x)=0$ as the initial ansatz.
 2. Compute the matrix radiance $\mathsf{g}(\mathbf{\Omega},x)$ by solving the matrix transport equation for each direction $\mathbf{\Omega}$ (or for each waveguide mode).
 3. Compute the new matrix field $\tilde{\mathsf{Q}}(x)$ from the radiance using the integral over the directions (or the sum over the waveguide modes).
-The computed matrix field is then mixed with the previous one with the mixing weight $f_{\rm relax}$. When $f_{\rm relax}=1$, this step reduces to a simple fixed-point iteration (see `method=fpi`).
+The computed matrix field is then mixed with the previous one weighted by the relaxation factor $f_{\rm relax}$. When $f_{\rm relax}=1$, this step reduces to a simple fixed-point iteration (see `method=fpi`).
 4. Iterate through steps 2-3 until the relative variations of the $\tilde{\mathsf{Q}}(x)$ field are small. This iteration is controlled by the `maxit` and `qtol` parameters.
 
 The parameters of the `solver` namelist are:
