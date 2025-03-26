@@ -7,9 +7,6 @@ program gauss_quad_test
     use gauss_quad
 	implicit none
     
-	!! Useful mathematical constants:
-    real(wp), parameter :: pi = acos(-1.0_wp)    !! Pi constant at working precision.
-    
     call test_gauss_jacobi_quad_1()
     call test_gauss_jacobi_quad_2a()
     call test_gauss_jacobi_quad_2b()
