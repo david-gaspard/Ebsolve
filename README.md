@@ -2,6 +2,7 @@
 
 [![Fortran](https://img.shields.io/badge/Fortran-734F96?logo=fortran&logoColor=fff)](https://fortran-lang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15090496.svg)](https://doi.org/10.5281/zenodo.15090496)
 
 * [PRESENTATION](#presentation)
     - [List of symbols](#list-of-symbols)
