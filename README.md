@@ -24,7 +24,8 @@ The matrix transport equation reads [[1](#1), [2](#2)]
  + \mathrm{i} \Omega_{x} \gamma_{\rm a} \Theta_{\rm a} \delta(x-x_{\rm a}) [\Lambda_+, \mathsf{g}] 
  + \mathrm{i} \Omega_{x} \gamma_{\rm b} \Theta_{\rm b} \delta(x-x_{\rm b}) [\Lambda_-, \mathsf{g}] $$</p>
 
-where $\tilde{\mathsf{Q}}(\mathbf{r})$ is the *matrix field*, a 2-by-2 complex matrix given by the directional integral
+where $\mathsf{g}(\mathbf{\Omega},\mathbf{r})$ is the *matrix [radiance](https://en.wikipedia.org/wiki/Radiance)*, 2-by-2 complex matrix depending on the position $\mathbf{r}$ and the direction of propagation $\mathbf{\Omega}$.
+Another important quantity is the *matrix field* $\tilde{\mathsf{Q}}(\mathbf{r})$, a 2-by-2 complex matrix given by the directional integral
 
 <p>$$ \tilde{\mathsf{Q}}(\mathbf{r}) = \oint \frac{d\mathbf{\Omega}}{S_d} \mathsf{g}(\mathbf{\Omega},\mathbf{r}) $$</p>
 
@@ -47,7 +48,10 @@ Here is a comprehensive list of symbols encountered in the matrix transport equa
 
 * $\mathsf{g}(\mathbf{\Omega},\mathbf{r})$: The *matrix radiance*, a 2-by-2 complex matrix which is the central quantity and the main unknown of the transport equation.
 This quantity also implicitly depends on the [transmission eigenvalue](https://en.wikipedia.org/wiki/Landauer_formula) $T$.
-It has the properties of being traceless, $\mathrm{Tr}\mathsf{g}=0$, and normalized to 1 according to $\mathsf{g}^2=\mathsf{1}$, due to the boundary conditions.
+It has the properties of being [traceless](https://en.wikipedia.org/wiki/Trace_(linear_algebra)), $\mathrm{Tr}\mathsf{g}=0$, and normalized to 1 according to $\mathsf{g}^2=\mathsf{1}$, due to the boundary conditions.
+However, this matrix is not Hermitian.
+* $\tilde{\mathsf{Q}}(\mathbf{r})$: The *matrix field* , a 2-by-2 complex matrix given by the directional integral of the matrix radiance.
+It is also traceless, $\mathrm{Tr}\tilde{\mathsf{Q}}=0$, but not normalized as the radiance. This matrix is not Hermitian either.
 * $\mathbf{\Omega}$: Unit vector pointing in the direction of propagation, such that $\mathbf{\Omega}=(\Omega_x,\mathbf{\Omega}_{\perp})$.
 * $\Omega_x$: Longitudinal component of the direction vector in the direction of the waveguide.
 * $\mathbf{\Omega}_{\perp}$: Transverse component of the direction vector with respect to the waveguide.
@@ -88,11 +92,11 @@ for arbitrarily small $\epsilon>0$.
 
 ## INSTALLATION
 
-The source files can be downloaded using the `git clone` command:
+The source files can be downloaded using the [`git clone`](https://git-scm.com/docs/git-clone) command:
 ```
 git clone https://github.com/<name_of_repository>.git
 ```
-To compile the program, call the `make` utility in the root directory:
+To compile the program, call the [`make`](https://en.wikipedia.org/wiki/Make_(software)) utility in the root directory:
 ```
 make all
 ```
@@ -101,11 +105,11 @@ make all
 
 The program has the following dependencies:
 
-* The `gfortran` compiler, or any other compiler compliant with the [Fortran 2008](https://en.wikipedia.org/wiki/Fortran#Fortran_2008) standard and providing support for [OpenMP](https://en.wikipedia.org/wiki/OpenMP).
+* The [`gfortran`](https://en.wikipedia.org/wiki/GNU_Fortran) compiler, or any other compiler compliant with the [Fortran 2008](https://en.wikipedia.org/wiki/Fortran#Fortran_2008) standard and providing support for [OpenMP](https://en.wikipedia.org/wiki/OpenMP).
 * The [LAPACK](https://en.wikipedia.org/wiki/LAPACK) Library.
 * The `mkdir` command is called to create subdirectories to store the output data.
 * [Python 3](https://en.wikipedia.org/wiki/Python_(programming_language)) scripts are called to generate the [TikZ](https://en.wikipedia.org/wiki/PGF/TikZ) codes for the plots.
-* The LaTeX compiler `pdflatex` with the [PGFPlots package](https://www.ctan.org/pkg/pgfplots) is called to compile the plots.
+* The [LaTeX](https://en.wikipedia.org/wiki/LaTeX) compiler `pdflatex` with the [PGFPlots package](https://www.ctan.org/pkg/pgfplots) is called to compile the plots.
 
 ## USAGE AND OPTIONS
 
