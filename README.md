@@ -114,7 +114,7 @@ The program has the following dependencies:
 * The [`gfortran`](https://en.wikipedia.org/wiki/GNU_Fortran) compiler, or any other compiler compliant with the [Fortran 2008](https://en.wikipedia.org/wiki/Fortran#Fortran_2008) standard and providing support for [OpenMP](https://en.wikipedia.org/wiki/OpenMP).
 * The [LAPACK](https://en.wikipedia.org/wiki/LAPACK) Library.
 * The [`mkdir`](https://en.wikipedia.org/wiki/Mkdir) command is called to create subdirectories to store the output data.
-* [Python 3](https://en.wikipedia.org/wiki/Python_(programming_language)) scripts are called to generate the [TikZ](https://en.wikipedia.org/wiki/PGF/TikZ) codes for the plots.
+* [Python 3](https://en.wikipedia.org/wiki/Python_(programming_language)) scripts are called to generate the [PGFPlots](https://www.ctan.org/pkg/pgfplots) codes for the plots.
 * The [LaTeX](https://en.wikipedia.org/wiki/LaTeX) compiler `pdflatex` with the [PGFPlots package](https://www.ctan.org/pkg/pgfplots) is called to compile the plots.
 
 ## USAGE AND OPTIONS
@@ -131,8 +131,8 @@ These namelists are described in details below. See also the `settings.nml` file
 
 The only entry in this namelist is `task` which specifies the task to be accomplished or the quantity to compute.
 The available tasks are:
-* [`distrib`](#distrib): Computes the transmission eigenvalue distribution.
-* [`fields`](#fields): Computes the matrix fields.
+* [`distrib`](#distrib): Computes the transmission eigenvalue distribution. See the namelists below.
+* [`fields`](#fields): Computes the matrix fields. See the namelists below.
 
 ### `eilenberger_system`
 
@@ -201,7 +201,7 @@ The parameters of this namelist are the following:
 This namelist specifies the settings of the solver of the matrix transport equation, and is thus mandatory.
 
 The iterative procedure to solve the equation is the following: 
-1. Let $\tilde{\mathsf{Q}}(x)=0$ as the initial ansatz.
+1. Let $\tilde{\mathsf{Q}}(x)=0$ be the initial ansatz.
 2. Compute the matrix radiance $\mathsf{g}(\mathbf{\Omega},x)$ by solving the matrix transport equation for each direction $\mathbf{\Omega}$ (or for each waveguide mode).
 3. Compute the new matrix field $\tilde{\mathsf{Q}}(x)$ from the radiance using the integral over the directions (or the sum over the waveguide modes).
 The computed matrix field is then mixed with the previous one weighted by the relaxation factor $f_{\rm relax}$. When $f_{\rm relax}=1$, this step reduces to a simple fixed-point iteration (see `method=fpi`).
@@ -210,7 +210,7 @@ The computed matrix field is then mixed with the previous one weighted by the re
 The parameters of the `solver` namelist are:
 
 * `method`: Type of iterative method used to solve the matrix transport equation. Either `fpi` for simple fixed-point iteration, or `relax` to use a relaxation factor. Recommended is `relax`.
-* `maxit`: Maximum number of fixed-point iteration to solve the Eilenberger equation. In general, `maxit=3000` is enough.
+* `maxit`: Maximum number of iterations to solve the Eilenberger equation. In general, `maxit=3000` is enough.
 * `qtol`: Tolerance on the relative variation of the $\tilde{\mathsf{Q}}(x)$ field. Typically between `1e-14` and `1e-9`. Larger than `1e-5` is not appropriate because the residual error on $\rho(T)$ will likely be too large.
 * `frelax`: Relaxation factor of the solver, only used with `method=relax`. Generally, frelax is between 0.5 and 1 for `dscat<10`, but over-relaxation (`frelax>1`) is likely more appropriate in the far diffusive regime (`dscat>10`).
 * `verbose`: Verbosity level of the solver (0=Quiet, 1=Verbose). This is useful only for debugging when something goes wrong.
