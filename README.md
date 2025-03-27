@@ -90,6 +90,11 @@ The sought transmission eigenvalue distribution can be obtained by
 
 for arbitrarily small $\epsilon>0$.
 
+### Acknowledgements
+
+This program was developed by David Gaspard ([Institut Langevin](https://www.institut-langevin.espci.fr/home), ESPCI Paris, PSL University, CNRS) mainly in July 2024 for the preparation of the papers [[1](#1), [2](#2)].
+This research has been supported by the ANR project MARS_light under reference ANR-19-CE30-0026 and by the program "Investissements d'Avenir" launched by the French Government.
+
 ## INSTALLATION
 
 The source files can be downloaded using the [`git clone`](https://git-scm.com/docs/git-clone) command:
@@ -119,13 +124,14 @@ ebsolve settings.nml
 ```
 The `ebsolve` executable reads and executes the instructions given by the configuration file `settings.nml`.
 This file contains several [Fortran namelists](https://www.intel.com/content/www/us/en/docs/fortran-compiler/developer-guide-reference/2024-2/namelist.html) containing the simulations parameters.
-These namelists are described in details below.
-See also the `settings.nml` file provided with the program.
+These namelists are described in details below. See also the `settings.nml` file provided with the program.
 
 ### `main_settings`
 
 The only entry in this namelist is `task` which specifies the task to be accomplished or the quantity to compute.
-This entry points to another namelist of the same title in the `settings.nml` file.
+The available tasks are:
+* [`distrib`](#distrib): Computes the transmission eigenvalue distribution.
+* [`fields`](#fields): Computes the matrix fields.
 
 ### `eilenberger_system`
 
