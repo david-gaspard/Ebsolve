@@ -7,6 +7,7 @@
 * [PRESENTATION](#presentation)
     - [List of symbols](#list-of-symbols)
     - [Transmission eigenvalue distribution](#transmission-eigenvalue-distribution)
+    - [Acknowledgements](#acknowledgements)
 * [INSTALLATION](#installation)
     - [Dependencies](#dependencies)
 * [USAGE AND OPTIONS](#usage-and-options)
